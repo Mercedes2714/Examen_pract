@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar Producto - Inventario{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-warning text-dark">
+                <h4 class="mb-0"><i class="bi bi-pencil"></i> Editar Producto #{{ producto['id'] }}</h4>
+            </div>
+            <div class="card-body">
+                <form action="/actualizar/{{ producto['id'] }}" method="POST">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre del Producto *</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" 
+                               value="{{ producto['nombre'] }}" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Categoría *</label>
+                        <select class="form-select" id="categoria" name="categoria" required>
+                            <option value="Computadoras" {{ 'selected' if producto['categoria'] == 'Computadoras' }}>Computadoras</option>
+                            <option value="Accesorios" {{ 'selected' if producto['categoria'] == 'Accesorios' }}>Accesorios</option>
+                            <option value="Monitores" {{ 'selected' if producto['categoria'] == 'Monitores' }}>Monitores</option>
+                            <option value="Almacenamiento" {{ 'selected' if producto['categoria'] == 'Almacenamiento' }}>Almacenamiento</option>
+                            <option value="Redes" {{ 'selected' if producto['categoria'] == 'Redes' }}>Redes</option>
+                            <option value="Software" {{ 'selected' if producto['categoria'] == 'Software' }}>Software</option>
+                        </select>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="precio" class="form-label">Precio ($) *</label>
+                            <input type="number" class="form-control" id="precio" name="precio" 
+                                   step="0.01" min="0.01" value="{{ producto['precio'] }}" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="stock" class="form-label">Stock/Cantidad *</label>
+                            <input type="number" class="form-control" id="stock" name="stock" 
+                                   min="0" value="{{ producto['stock'] }}" required>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="/" class="btn btn-secondary">
+                            <i class="bi bi-x-circle"></i> Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-warning">
+                            <i class="bi bi-check-circle"></i> Actualizar Producto
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
